@@ -151,12 +151,112 @@
 </div>
 
 <script>
-  // Pass variants data to product form
   (function() {
-    const form = document.getElementById('product-form');
-    if (!form) return;
     const variantsEl = document.getElementById('product-variants-data');
-    if (variantsEl) form.dataset.variants = variantsEl.textContent.trim();
+    if (!variantsEl) return;
+
+    const variants = JSON.parse(variantsEl.textContent.trim());
+    const form = document.getElementById('product-form');
+    const variantInput = document.getElementById('variant-id');
+    const priceEl = document.getElementById('product-price');
+    const addToCartBtn = document.getElementById('product-add-to-cart');
+    const mainImage = document.getElementById('product-gallery-main');
+    const thumbBtns = document.querySelectorAll('.product-gallery__thumb');
+
+    // Track selected options
+    const selectedOptions = {};
+    document.querySelectorAll('.variant-btn.is-active').forEach(btn => {
+      const idx = btn.dataset.optionIndex;
+      selectedOptions[idx] = btn.dataset.value;
+    });
+
+    function findVariant() {
+      return variants.find(v =>
+        v.options.every((opt, i) => selectedOptions[i] === opt)
+      );
+    }
+
+    function updateGallery(variant) {
+      if (!variant || !variant.featured_image || !mainImage) return;
+      const img = variant.featured_image;
+      // Swap main image src — use Shopify CDN sizing
+      const newSrc = img.src.replace(/(\.[^.]+)$/, '_900x$1').replace('https:', '');
+      mainImage.src = img.src;
+      mainImage.alt = img.alt || mainImage.alt;
+
+      // Highlight matching thumb
+      thumbBtns.forEach(btn => {
+        const thumbSrc = btn.querySelector('img')?.src || '';
+        const variantSrc = img.src || '';
+        // Match by common filename segment
+        const fileName = variantSrc.split('/').pop().split('?')[0].split('.')[0];
+        if (thumbSrc.includes(fileName)) {
+          btn.classList.add('is-active');
+        } else {
+          btn.classList.remove('is-active');
+        }
+      });
+    }
+
+    function updateVariant() {
+      const variant = findVariant();
+      if (!variant) return;
+
+      variantInput.value = variant.id;
+
+      // Update price
+      if (priceEl) {
+        const price = (variant.price / 100).toFixed(2);
+        priceEl.textContent = '$' + price;
+      }
+
+      // Update add to cart button
+      if (addToCartBtn) {
+        if (variant.available) {
+          addToCartBtn.disabled = false;
+          addToCartBtn.textContent = 'Add to Cart';
+        } else {
+          addToCartBtn.disabled = true;
+          addToCartBtn.textContent = 'Sold Out';
+        }
+      }
+
+      updateGallery(variant);
+    }
+
+    // Handle variant button clicks
+    document.querySelectorAll('.variant-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const idx = this.dataset.optionIndex;
+        const val = this.dataset.value;
+
+        // Update active state within this option group
+        document.querySelectorAll(`.variant-btn[data-option-index="${idx}"]`).forEach(b => {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-pressed', 'false');
+        });
+        this.classList.add('is-active');
+        this.setAttribute('aria-pressed', 'true');
+
+        // Update selected option label
+        const labelEl = document.getElementById('option-selected-' + (parseInt(idx) + 1));
+        if (labelEl) labelEl.textContent = val;
+
+        selectedOptions[idx] = val;
+        updateVariant();
+      });
+    });
+
+    // Thumb click handler
+    thumbBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        if (!mainImage) return;
+        mainImage.src = this.dataset.src;
+        mainImage.alt = this.dataset.alt;
+        thumbBtns.forEach(b => b.classList.remove('is-active'));
+        this.classList.add('is-active');
+      });
+    });
   })();
 </script>
 
