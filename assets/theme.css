@@ -725,7 +725,12 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
   position: absolute;
   inset: 0;
-  transition: opacity var(--transition-slow);
+  transition: opacity var(--transition-slow), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1.0);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.06);
 }
 
 .product-card__image-alt {

@@ -35,6 +35,15 @@
         </div>
       </div>
 
+      {%- comment -%} Shop Column — always shown {%- endcomment -%}
+      <div class="site-footer__col">
+        <h3 class="site-footer__col-heading">Shop</h3>
+        <ul>
+          <li><a href="{{ routes.collections_url }}">Collections</a></li>
+          <li><a href="/collections/all">All Prints</a></li>
+        </ul>
+      </div>
+
       {%- comment -%} Nav Columns {%- endcomment -%}
       {%- for i in (1..3) -%}
         {%- liquid
