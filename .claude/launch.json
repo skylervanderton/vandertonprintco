@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Shopify Theme Dev",
+      "runtimeExecutable": "/Users/skylervanderton/.npm-global/bin/shopify",
+      "runtimeArgs": ["theme", "dev", "--store", "vanderton-print-co.myshopify.com", "--store-password", "ahyoff"],
+      "port": 9292
+    }
+  ]
+}

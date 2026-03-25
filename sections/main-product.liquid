@@ -114,7 +114,7 @@
                     data-option-index="{{ forloop.parentloop.index0 }}"
                     data-value="{{ value | escape }}"
                     type="button"
-                    aria-pressed="{{ option.selected_value == value }}"
+                    aria-pressed="{% if option.selected_value == value %}true{% else %}false{% endif %}"
                   >
                     {{ value }}
                   </button>

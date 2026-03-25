@@ -22,7 +22,8 @@
           {{ section.settings.embed_code }}
         </div>
       {%- else -%}
-        {%- form 'customer', id: 'newsletter-form-' | append: section.id -%}
+        {%- assign newsletter_form_id = 'newsletter-form-' | append: section.id -%}
+        {%- form 'customer', id: newsletter_form_id -%}
           <input type="hidden" name="contact[tags]" value="newsletter">
           <div class="newsletter-form">
             <label for="newsletter-email-{{ section.id }}" class="visually-hidden">
