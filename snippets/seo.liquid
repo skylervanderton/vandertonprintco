@@ -1,0 +1,158 @@
+{%- comment -%}
+  SEO Snippet — Vanderton Print Co.
+  Outputs: <title>, <meta name="description">, Open Graph, Twitter Cards,
+           <link rel="canonical">, and LCP preload hint.
+  Included in layout/theme.liquid <head> via: {%- render 'seo' -%}
+  All defaults are overridable via Shopify admin metafields (seo.description).
+{%- endcomment -%}
+
+{%- liquid
+  comment ---- TITLE ---- endcomment
+  case template.name
+    when 'index'
+      assign seo_title = 'Fine Art Nature Prints for Your Home | Vanderton Print Co.'
+    when 'collection'
+      assign seo_title = collection.title | append: ' — Fine Art Nature Prints | Vanderton Print Co.'
+    when 'product'
+      assign seo_title = product.title | append: ' — Fine Art Print | Vanderton Print Co.'
+    when 'page'
+      case template.suffix
+        when 'our-story'
+          assign seo_title = 'About Vanderton Print Co. | Fine Art Nature Print Shop'
+        when 'printing-process'
+          assign seo_title = 'Our Printing Process | Hahnemühle Fine Art Prints | Vanderton Print Co.'
+        when 'faq'
+          assign seo_title = 'FAQ — Fine Art Print Questions | Vanderton Print Co.'
+        when 'contact'
+          assign seo_title = 'Contact Vanderton Print Co. | Fine Art Nature Prints'
+        else
+          assign seo_title = page.title | append: ' | Vanderton Print Co.'
+      endcase
+    when 'blog'
+      assign seo_title = blog.title | append: ' | Vanderton Print Co.'
+    when 'article'
+      assign seo_title = article.title | append: ' | Vanderton Print Co.'
+    else
+      assign seo_title = page_title | append: ' | Vanderton Print Co.'
+  endcase
+
+  comment ---- META DESCRIPTION DEFAULTS ---- endcomment
+  case template.name
+    when 'index'
+      assign seo_description_default = 'Shop fine art nature prints and framed prints from Vanderton Print Co. Printed on archival Hahnemühle Torchon Paper. Landscapes, animals, botanicals, and more — shipped nationwide.'
+    when 'collection'
+      assign seo_description_default = 'Shop ' | append: collection.title | append: ' fine art prints from Vanderton Print Co. Archival photo prints and framed prints on Hahnemühle Torchon Paper, shipped nationwide.'
+    when 'product'
+      assign seo_description_default = product.title | append: ' — a fine art nature print from Vanderton Print Co. Available as an archival photo print or framed print on Hahnemühle Torchon Paper. Ships nationwide.'
+    when 'page'
+      case template.suffix
+        when 'our-story'
+          assign seo_description_default = 'Vanderton Print Co. is a luxury fine art photo print shop founded by nature photographer Skyler Vanderton. Every print is produced on archival Hahnemühle Torchon Paper through White House Custom Colour.'
+        when 'printing-process'
+          assign seo_description_default = 'Every Vanderton Print Co. print is produced on archival Hahnemühle Torchon Paper through White House Custom Colour — one of the most respected fine art print labs in the world.'
+        when 'faq'
+          assign seo_description_default = 'Find answers to common questions about our fine art prints, Hahnemühle Torchon Paper, framing options, shipping, and more.'
+        when 'contact'
+          assign seo_description_default = 'Get in touch with Vanderton Print Co. for questions about orders, prints, framing, or commercial inquiries.'
+        else
+          assign seo_description_default = page_description
+      endcase
+    when 'article'
+      assign seo_description_default = article.excerpt_or_content | strip_html | truncate: 160
+    else
+      assign seo_description_default = page_description
+  endcase
+
+  comment
+    Allow metafield override via Shopify admin: namespace=seo, key=description
+  endcomment
+  if template.name == 'product' and product.metafields.seo.description != blank
+    assign seo_description = product.metafields.seo.description
+  elsif template.name == 'collection' and collection.metafields.seo.description != blank
+    assign seo_description = collection.metafields.seo.description
+  elsif template.name == 'page' and page.metafields.seo.description != blank
+    assign seo_description = page.metafields.seo.description
+  elsif template.name == 'article' and article.metafields.seo.description != blank
+    assign seo_description = article.metafields.seo.description
+  else
+    assign seo_description = seo_description_default
+  endif
+
+  comment ---- OG IMAGE ---- endcomment
+  if template.name == 'product' and product.featured_image
+    assign og_image = product.featured_image | image_url: width: 1200
+    assign og_image_alt = product.featured_image.alt | default: product.title | escape
+  elsif template.name == 'collection' and collection.image
+    assign og_image = collection.image | image_url: width: 1200
+    assign og_image_alt = collection.image.alt | default: collection.title | escape
+  elsif template.name == 'article' and article.image
+    assign og_image = article.image | image_url: width: 1200
+    assign og_image_alt = article.image.alt | default: article.title | escape
+  else
+    assign og_image = ''
+    assign og_image_alt = 'Fine art nature prints for your home — Vanderton Print Co.'
+  endif
+-%}
+
+{%- comment -%} ===================== TITLE ===================== {%- endcomment -%}
+<title>{{ seo_title | escape }}</title>
+
+{%- comment -%} ===================== META DESCRIPTION ===================== {%- endcomment -%}
+{%- if seo_description != blank -%}
+  <meta name="description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 | escape }}">
+{%- endif -%}
+
+{%- comment -%} ===================== CANONICAL ===================== {%- endcomment -%}
+{%- if template.name == 'collection' -%}
+  <link rel="canonical" href="{{ shop.url }}{{ collection.url }}">
+{%- elsif template.name == 'product' -%}
+  <link rel="canonical" href="{{ shop.url }}{{ product.url | split: '?' | first }}">
+{%- elsif template.name == 'article' -%}
+  <link rel="canonical" href="{{ shop.url }}{{ article.url }}">
+{%- elsif template.name == 'page' -%}
+  <link rel="canonical" href="{{ shop.url }}{{ page.url }}">
+{%- elsif template.name == 'blog' -%}
+  <link rel="canonical" href="{{ shop.url }}{{ blog.url }}">
+{%- else -%}
+  <link rel="canonical" href="{{ shop.url }}{{ request.path | split: '?' | first }}">
+{%- endif -%}
+
+{%- comment -%} ===================== OPEN GRAPH ===================== {%- endcomment -%}
+<meta property="og:site_name" content="Vanderton Print Co.">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="{{ seo_title | escape }}">
+<meta property="og:description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 | escape }}">
+{%- if template.name == 'collection' -%}
+  <meta property="og:url" content="{{ shop.url }}{{ collection.url }}">
+{%- elsif template.name == 'product' -%}
+  <meta property="og:url" content="{{ shop.url }}{{ product.url | split: '?' | first }}">
+{%- else -%}
+  <meta property="og:url" content="{{ shop.url }}{{ request.path | split: '?' | first }}">
+{%- endif -%}
+{%- if template.name == 'product' -%}
+  <meta property="og:type" content="product">
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  {%- if current_variant.price -%}
+    <meta property="product:price:amount" content="{{ current_variant.price | money_without_currency }}">
+    <meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+  {%- endif -%}
+{%- else -%}
+  <meta property="og:type" content="website">
+{%- endif -%}
+{%- if og_image != blank -%}
+  <meta property="og:image" content="https:{{ og_image }}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:alt" content="{{ og_image_alt }}">
+{%- endif -%}
+
+{%- comment -%} ===================== TWITTER / X CARD ===================== {%- endcomment -%}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ seo_title | escape }}">
+<meta name="twitter:description" content="{{ seo_description | strip_html | strip_newlines | truncate: 160 | escape }}">
+{%- if og_image != blank -%}
+  <meta name="twitter:image" content="https:{{ og_image }}">
+  <meta name="twitter:image:alt" content="{{ og_image_alt }}">
+{%- endif -%}
+{%- if settings.social_instagram != blank -%}
+  <meta name="twitter:site" content="@{{ settings.social_instagram }}">
+{%- endif -%}

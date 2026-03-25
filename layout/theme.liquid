@@ -5,19 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>
-    {%- if template == 'index' -%}
-      {{ shop.name }}{% if page_title != blank %} — {{ page_title }}{% endif %}
-    {%- elsif page_title == blank -%}
-      {{ shop.name }}
-    {%- else -%}
-      {{ page_title }} — {{ shop.name }}
-    {%- endif -%}
-  </title>
-
-  {%- if page_description -%}
-    <meta name="description" content="{{ page_description | escape }}">
-  {%- endif -%}
+  {%- render 'seo' -%}
 
   {%- if settings.favicon -%}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
@@ -95,5 +83,7 @@
   <div class="overlay" id="overlay" aria-hidden="true"></div>
 
   <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+
+  {%- render 'schema' -%}
 </body>
 </html>

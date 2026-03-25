@@ -122,6 +122,12 @@
       </div>
 
       {%- paginate collection.products by section.settings.products_per_page -%}
+        {%- if paginate.previous -%}
+          <link rel="prev" href="{{ paginate.previous.url }}">
+        {%- endif -%}
+        {%- if paginate.next -%}
+          <link rel="next" href="{{ paginate.next.url }}">
+        {%- endif -%}
         {%- if collection.products.size > 0 -%}
           <div class="grid--products product-grid-container" id="product-grid">
             {%- for product in collection.products -%}
