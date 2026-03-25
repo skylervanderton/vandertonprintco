@@ -64,10 +64,10 @@
     "all_products": "All Products",
     "sort_by": "Sort by",
     "filter_by": "Filter by",
-    "no_products": "No products found",
+    "no_products": "No prints found",
     "showing_count": {
-      "one": "Showing {{ count }} product",
-      "other": "Showing {{ count }} products"
+      "one": "Showing {{ count }} print",
+      "other": "Showing {{ count }} prints"
     },
     "sort_options": {
       "featured": "Featured",
