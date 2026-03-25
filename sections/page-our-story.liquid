@@ -1,0 +1,216 @@
+{%- comment -%} Our Story — custom rich template with editorial sections {%- endcomment -%}
+
+{%- comment -%} Hero {%- endcomment -%}
+<div
+  class="hero hero--medium"
+  style="color: #fff;"
+>
+  {%- if section.settings.hero_image != blank -%}
+    <div class="hero__media">
+      <img
+        src="{{ section.settings.hero_image | image_url: width: 1600 }}"
+        alt="{{ section.settings.hero_image.alt | escape }}"
+        width="{{ section.settings.hero_image.width }}"
+        height="{{ section.settings.hero_image.height }}"
+        loading="eager">
+    </div>
+    <div class="hero__overlay" style="background-color:#000; opacity:0.4;"></div>
+  {%- endif -%}
+  <div class="hero__content hero__content--center">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="hero__heading">{{ page.title }}</h1>
+    {%- if section.settings.hero_subheading != blank -%}
+      <p class="hero__subheading" style="margin: 0 auto;">{{ section.settings.hero_subheading }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{%- comment -%} Page content blocks {%- endcomment -%}
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+
+    {%- when 'rich_text' -%}
+      <section
+        class="newsletter-section"
+        style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};"
+        {{ block.shopify_attributes }}
+      >
+        <div class="container--narrow" style="text-align: {{ block.settings.alignment }};">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="eyebrow" style="margin-bottom: 16px;">{{ block.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h2 style="font-family: var(--font-heading); font-size: clamp(1.8rem,3.5vw,2.8rem); font-weight:300; margin-bottom: 24px;">{{ block.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="rte" style="color: {% if block.settings.bg_color == '#000000' %}rgba(255,255,255,0.75){% else %}var(--color-text-muted){% endif %}; max-width: 100%;">
+              {{ block.settings.text }}
+            </div>
+          {%- endif -%}
+        </div>
+      </section>
+
+    {%- when 'image_text' -%}
+      <section
+        class="image-text{% if block.settings.image_position == 'right' %} image-text--image-right{% endif %}"
+        style="background-color: {{ block.settings.bg_color }}; color: {{ block.settings.text_color }};"
+        {{ block.shopify_attributes }}
+      >
+        <div class="image-text__media">
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 900 }}"
+              alt="{{ block.settings.image.alt | escape }}"
+              loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="image-text__content">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="image-text__eyebrow">{{ block.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if block.settings.heading != blank -%}
+            <h2 class="image-text__heading">{{ block.settings.heading }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="image-text__text">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <a href="{{ block.settings.button_link }}" class="btn {% if block.settings.bg_color == '#000000' %}btn--outline-white{% else %}btn--secondary{% endif %}">
+              {{ block.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </section>
+
+  {%- endcase -%}
+{%- endfor -%}
+
+{% render 'newsletter' %}
+
+{% schema %}
+{
+  "name": "Our Story page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Hero eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "hero_subheading",
+      "label": "Hero subheading"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "rich_text",
+      "name": "Rich text",
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#000000"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "center", "label": "Center" }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "image_text",
+      "name": "Image with text",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#000000"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,59 @@
+{%- if section.settings.show_bar -%}
+<div
+  class="announcement-bar{% if section.settings.enable_marquee %} announcement-bar--marquee{% endif %}"
+  style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};"
+  role="region"
+  aria-label="Announcement"
+>
+  <p class="announcement-bar__text">
+    {%- if section.settings.link != blank -%}
+      <a href="{{ section.settings.link }}">{{ section.settings.text }}</a>
+    {%- else -%}
+      {{ section.settings.text }}
+    {%- endif -%}
+  </p>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Announcement bar",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_bar",
+      "label": "Show announcement bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement text",
+      "default": "20% of all sales are donated directly to our conservation partners"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link (optional)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#2d2d2d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_marquee",
+      "label": "Enable scrolling marquee",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

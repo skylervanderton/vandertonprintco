@@ -1,0 +1,19 @@
+{
+  "current": {
+    "color_primary": "#000000",
+    "color_background": "#ffffff",
+    "color_accent": "#f94c43",
+    "color_bg_secondary": "#f2f2f2",
+    "color_footer_bg": "#f9f9f9",
+    "color_border": "#e2e2e2",
+    "color_text_muted": "#6a6a6a",
+    "type_base_size": 14,
+    "logo_max_width": 180,
+    "social_instagram": "",
+    "social_facebook": "",
+    "social_pinterest": "",
+    "cart_type": "drawer",
+    "enable_cart_notes": false
+  },
+  "presets": {}
+}

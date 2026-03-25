@@ -1,0 +1,114 @@
+{
+  "general": {
+    "title": "Vanderton Print Co",
+    "currency_symbol": "$"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content",
+    "close": "Close",
+    "open_menu": "Open navigation menu",
+    "close_menu": "Close navigation menu",
+    "open_cart": "Open cart",
+    "close_cart": "Close cart",
+    "open_search": "Open search",
+    "close_search": "Close search",
+    "next_slide": "Next slide",
+    "previous_slide": "Previous slide",
+    "view_account": "View account"
+  },
+  "navigation": {
+    "shop": "Shop",
+    "series": "Series",
+    "animal": "Animal",
+    "format": "Format",
+    "gift_cards": "Gift Cards",
+    "story": "Story",
+    "journal": "Journal",
+    "connect": "Connect",
+    "all_products": "All Products"
+  },
+  "cart": {
+    "title": "Your Cart",
+    "add_to_cart": "Add to Cart",
+    "view_cart": "View Cart",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
+    "empty": "Your cart is empty",
+    "empty_cta": "Shop our products",
+    "items_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    },
+    "remove": "Remove",
+    "quantity": "Quantity",
+    "note_placeholder": "Order notes (optional)"
+  },
+  "products": {
+    "title": "Products",
+    "from_price": "From {{ price }}",
+    "price_range": "{{ min }} – {{ max }}",
+    "sale": "Sale",
+    "sold_out": "Sold Out",
+    "unavailable": "Unavailable",
+    "quantity": "Quantity",
+    "compare_at": "Regular price",
+    "size": "Size",
+    "framing": "Framing",
+    "add_to_wishlist": "Add to wishlist",
+    "view_product": "View product",
+    "species": "Species",
+    "endangered_level": "Endangered Level"
+  },
+  "collections": {
+    "title": "Collections",
+    "all_products": "All Products",
+    "sort_by": "Sort by",
+    "filter_by": "Filter by",
+    "no_products": "No products found",
+    "showing_count": {
+      "one": "Showing {{ count }} product",
+      "other": "Showing {{ count }} products"
+    },
+    "sort_options": {
+      "featured": "Featured",
+      "best_selling": "Best Selling",
+      "title_asc": "A–Z",
+      "title_desc": "Z–A",
+      "price_asc": "Price: Low to High",
+      "price_desc": "Price: High to Low",
+      "created_asc": "Oldest",
+      "created_desc": "Newest"
+    },
+    "filters": {
+      "animal": "Animal",
+      "format": "Format",
+      "series": "Series",
+      "clear_all": "Clear all",
+      "apply": "Apply"
+    }
+  },
+  "forms": {
+    "email": "Email address",
+    "email_placeholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "submit": "Submit",
+    "success": "Thank you for subscribing!",
+    "error": "Something went wrong. Please try again."
+  },
+  "footer": {
+    "newsletter_heading": "Join the Journey",
+    "newsletter_subtext": "Stay up to date with new collections and conservation stories.",
+    "copyright": "© {{ year }} {{ shop }}. All rights reserved."
+  },
+  "pages": {
+    "our_story": "Our Story",
+    "experience": "The Experience",
+    "meet_artist": "Meet the Artist",
+    "journal": "Journal"
+  },
+  "pagination": {
+    "previous": "Previous",
+    "next": "Next",
+    "page": "Page {{ page }}"
+  }
+}

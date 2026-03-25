@@ -1,0 +1,186 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_media = product.media
+-%}
+
+<div class="container">
+  {% render 'breadcrumb' %}
+
+  <div class="product-layout">
+    {%- comment -%} Product Gallery {%- endcomment -%}
+    <div class="product-gallery">
+      <div class="product-gallery__main">
+        {%- if product_media.size > 0 -%}
+          <img
+            id="product-gallery-main"
+            src="{{ product_media[0] | image_url: width: 900 }}"
+            alt="{{ product_media[0].alt | escape }}"
+            width="{{ product_media[0].preview_image.width }}"
+            height="{{ product_media[0].preview_image.height }}"
+            loading="eager"
+            fetchpriority="high">
+        {%- else -%}
+          <img src="{{ 'product-placeholder.svg' | asset_url }}" alt="{{ product.title | escape }}">
+        {%- endif -%}
+      </div>
+
+      {%- if product_media.size > 1 -%}
+        <div class="product-gallery__thumbs">
+          {%- for media in product_media limit: 5 -%}
+            <button
+              class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+              data-src="{{ media | image_url: width: 900 }}"
+              data-alt="{{ media.alt | escape }}"
+              type="button"
+              aria-label="{{ media.alt | default: product.title | escape }}"
+            >
+              <img
+                src="{{ media | image_url: width: 120 }}"
+                alt="{{ media.alt | escape }}"
+                width="120"
+                height="120"
+                loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Product Info {%- endcomment -%}
+    <div class="product-info">
+      {%- if product.vendor -%}
+        <p class="product-info__vendor">{{ product.vendor }}</p>
+      {%- endif -%}
+
+      <h1 class="product-info__title">{{ product.title }}</h1>
+
+      {%- comment -%} Species metadata (from product metafields or tags) {%- endcomment -%}
+      {%- assign species_tag = product.tags | join: ',' -%}
+      {%- if product.metafields.custom.species != blank or product.metafields.custom.endangered_level != blank -%}
+        <div class="product-info__species">
+          {%- if product.metafields.custom.species != blank -%}
+            <div class="product-info__species-item">
+              <span class="product-info__species-label">{{ 'products.species' | t }}</span>
+              <span class="product-info__species-value">{{ product.metafields.custom.species }}</span>
+            </div>
+          {%- endif -%}
+          {%- if product.metafields.custom.endangered_level != blank -%}
+            <div class="product-info__species-item">
+              <span class="product-info__species-label">{{ 'products.endangered_level' | t }}</span>
+              <span class="product-info__species-value">{{ product.metafields.custom.endangered_level }}</span>
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Price {%- endcomment -%}
+      <div class="product-info__price">
+        <span id="product-price">
+          {%- if product.price_varies -%}
+            {{ 'products.from_price' | t: price: product.price_min | money }}
+          {%- else -%}
+            {{ current_variant.price | money }}
+          {%- endif -%}
+        </span>
+        {%- if current_variant.compare_at_price > current_variant.price -%}
+          <span style="text-decoration: line-through; color: var(--color-text-muted); font-size: 0.85em; margin-left: 8px;">
+            {{ current_variant.compare_at_price | money }}
+          </span>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Product Form {%- endcomment -%}
+      {%- form 'product', product,
+        id: 'product-form',
+        class: 'product-form',
+        novalidate: 'novalidate',
+        data-variants: product.variants_with_only_default_variant | default: false
+      -%}
+        <input type="hidden" name="id" value="{{ current_variant.id }}" id="variant-id">
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="product-form__option">
+              <div class="product-form__option-label">
+                <span>{{ option.name }}</span>
+                <span class="product-form__option-selected" id="option-selected-{{ forloop.index }}">
+                  {{ option.selected_value }}
+                </span>
+              </div>
+              <div class="product-form__variants" role="group" aria-label="{{ option.name }}">
+                {%- for value in option.values -%}
+                  <button
+                    class="variant-btn{% if option.selected_value == value %} is-active{% endif %}"
+                    data-option-index="{{ forloop.parentloop.index0 }}"
+                    data-value="{{ value | escape }}"
+                    type="button"
+                    aria-pressed="{{ option.selected_value == value }}"
+                  >
+                    {{ value }}
+                  </button>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        {%- comment -%} Hidden variants data for JS {%- endcomment -%}
+        <script type="application/json" id="product-variants-data">
+          {{ product.variants | json }}
+        </script>
+
+        <div class="product-form__atc">
+          <button
+            type="submit"
+            name="add"
+            class="btn btn--primary btn--full"
+            id="product-add-to-cart"
+            {%- unless current_variant.available -%}disabled{%- endunless -%}
+          >
+            {%- if current_variant.available -%}
+              {{ 'cart.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        </div>
+      {%- endform -%}
+
+      {%- if product.description != blank -%}
+        <div class="product-info__description rte">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<script>
+  // Pass variants data to product form
+  (function() {
+    const form = document.getElementById('product-form');
+    if (!form) return;
+    const variantsEl = document.getElementById('product-variants-data');
+    if (variantsEl) form.dataset.variants = variantsEl.textContent.trim();
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product information",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_share_buttons",
+      "label": "Show share buttons",
+      "default": false
+    }
+  ]
+}
+{% endschema %}

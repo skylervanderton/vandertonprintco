@@ -1,0 +1,105 @@
+<div
+  class="cart-drawer"
+  id="cart-drawer"
+  data-cart-drawer
+  aria-hidden="true"
+  role="dialog"
+  aria-label="{{ 'cart.title' | t }}"
+  aria-modal="true"
+>
+  <div class="cart-drawer__header">
+    <div>
+      <span class="cart-drawer__title">{{ 'cart.title' | t }}</span>
+      <span class="cart-drawer__count">({{ cart.item_count }})</span>
+    </div>
+    <button
+      class="cart-drawer__close"
+      data-close-cart
+      aria-label="{{ 'accessibility.close_cart' | t }}"
+      type="button"
+    >
+      {% render 'icon-close' %}
+    </button>
+  </div>
+
+  <div class="cart-drawer__body">
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-drawer__empty">
+        <p class="cart-drawer__empty-text">{{ 'cart.empty' | t }}</p>
+        <a href="/collections/shop" class="btn btn--primary">{{ 'cart.empty_cta' | t }}</a>
+      </div>
+    {%- else -%}
+      <div class="cart-drawer__items">
+        {%- for item in cart.items -%}
+          <div class="cart-item" data-cart-item data-key="{{ item.key }}">
+            <div class="cart-item__image">
+              <a href="{{ item.url }}">
+                {%- if item.image -%}
+                  <img
+                    src="{{ item.image | image_url: width: 200 }}"
+                    alt="{{ item.image.alt | escape }}"
+                    width="90"
+                    height="120"
+                    loading="lazy">
+                {%- endif -%}
+              </a>
+            </div>
+            <div class="cart-item__info">
+              <p class="cart-item__title"><a href="{{ item.url }}">{{ item.product.title }}</a></p>
+              {%- if item.variant.title != 'Default Title' -%}
+                <p class="cart-item__variant">{{ item.variant.title }}</p>
+              {%- endif -%}
+              <p class="cart-item__price">{{ item.final_line_price | money }}</p>
+              <div class="cart-item__actions">
+                <div class="cart-item__qty">
+                  <button data-qty-minus type="button" aria-label="Decrease quantity">−</button>
+                  <span class="cart-item__qty-num" data-qty-value>{{ item.quantity }}</span>
+                  <button data-qty-plus type="button" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="cart-item__remove" data-remove-item type="button">
+                  {{ 'cart.remove' | t }}
+                </button>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="cart-drawer__footer">
+    <div class="cart-drawer__subtotal">
+      <span class="cart-drawer__subtotal-label">{{ 'cart.subtotal' | t }}</span>
+      <span class="cart-drawer__subtotal-price">{{ cart.total_price | money }}</span>
+    </div>
+
+    {%- if settings.enable_cart_notes -%}
+      <div style="margin-bottom: 16px;">
+        <textarea
+          name="note"
+          form="cart-form"
+          class="newsletter-form__input"
+          style="width:100%; resize:vertical; min-height:80px; border-right: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);"
+          placeholder="{{ 'cart.note_placeholder' | t }}"
+        >{{ cart.note }}</textarea>
+      </div>
+    {%- endif -%}
+
+    <a href="{{ routes.checkout_url }}" class="btn btn--primary btn--full">
+      {{ 'cart.checkout' | t }}
+    </a>
+
+    <a href="{{ routes.cart_url }}" class="btn btn--secondary btn--full" style="margin-top: 10px;">
+      {{ 'cart.view_cart' | t }}
+    </a>
+
+    <p class="cart-drawer__tax-note">Shipping & taxes calculated at checkout</p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": []
+}
+{% endschema %}

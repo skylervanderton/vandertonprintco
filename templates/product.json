@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "show_vendor": true,
+        "show_share_buttons": false
+      }
+    },
+    "related_newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "bg_color": "#f2f2f2",
+        "text_color": "#000000",
+        "eyebrow": "Stay Connected",
+        "heading": "Join the Journey",
+        "text": "Be the first to know about new prints and conservation stories."
+      }
+    }
+  },
+  "order": ["main", "related_newsletter"]
+}

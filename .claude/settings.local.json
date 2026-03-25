@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(BASE=\"/Users/skylervanderton/Desktop/Vanderton Print Co Shopify Theme\")",
+      "Bash(mkdir -p \"$BASE/config\" \"$BASE/locales\" \"$BASE/layout\" \"$BASE/assets\" \"$BASE/sections\" \"$BASE/snippets\" \"$BASE/templates\")",
+      "Bash(gh auth:*)",
+      "Bash(git --version)"
+    ]
+  }
+}

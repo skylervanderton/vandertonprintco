@@ -1,0 +1,85 @@
+<section class="partner-logos">
+  <div class="container">
+    {%- if section.settings.heading != blank -%}
+      <p class="partner-logos__heading">{{ section.settings.heading }}</p>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="partner-logos__list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="partner-logos__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ block.settings.alt_text }}">
+            {%- endif -%}
+
+            {%- if block.settings.logo != blank -%}
+              <img
+                src="{{ block.settings.logo | image_url: width: 200 }}"
+                alt="{{ block.settings.alt_text | escape }}"
+                width="auto"
+                height="48"
+                loading="lazy">
+            {%- else -%}
+              <span style="font-family: var(--font-display); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-muted);">
+                {{ block.settings.alt_text }}
+              </span>
+            {%- endif -%}
+
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Partner logos",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Our Conservation Partners"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Partner",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Partner name / alt text",
+          "default": "Partner Name"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Partner logos",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

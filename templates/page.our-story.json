@@ -1,0 +1,36 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-our-story",
+      "blocks": {
+        "intro": {
+          "type": "rich_text",
+          "settings": {
+            "bg_color": "#ffffff",
+            "text_color": "#000000",
+            "alignment": "center",
+            "eyebrow": "Our Mission",
+            "heading": "Art with a Purpose",
+            "text": "<p>We believe that art and conservation can go hand in hand. Every print we sell contributes directly to protecting the wildlife that inspired it.</p>"
+          }
+        },
+        "artist": {
+          "type": "image_text",
+          "settings": {
+            "image_position": "left",
+            "bg_color": "#000000",
+            "text_color": "#ffffff",
+            "eyebrow": "The Artist",
+            "heading": "Behind the Lens",
+            "text": "<p>Our photographers spend months in the field capturing these incredible moments — moments that tell the story of life on the edge of extinction.</p>"
+          }
+        }
+      },
+      "block_order": ["intro", "artist"],
+      "settings": {
+        "eyebrow": "Est. 2020"
+      }
+    }
+  },
+  "order": ["main"]
+}

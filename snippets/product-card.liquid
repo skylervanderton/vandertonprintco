@@ -1,0 +1,85 @@
+{%- comment -%}
+  Renders a product card.
+  Usage: {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign product_url = product.url | within: collection
+  assign first_image = product.featured_media
+  assign second_image = product.media[1]
+  assign price_min = product.price_min
+  assign price_max = product.price_max
+  assign on_sale = false
+  if product.compare_at_price_min > product.price_min
+    assign on_sale = true
+  endif
+-%}
+
+<article class="product-card" data-product-id="{{ product.id }}">
+  <a href="{{ product_url }}" class="product-card__image-link" tabindex="-1" aria-hidden="true">
+    <div class="product-card__image-wrapper">
+      {%- if on_sale -%}
+        <span class="product-card__badge">Sale</span>
+      {%- endif -%}
+
+      {%- if first_image -%}
+        <img
+          class="product-card__image"
+          src="{{ first_image | image_url: width: 600 }}"
+          alt="{{ first_image.alt | escape }}"
+          width="{{ first_image.preview_image.width }}"
+          height="{{ first_image.preview_image.height }}"
+          loading="lazy">
+      {%- else -%}
+        <img class="product-card__image" src="{{ 'product-placeholder.svg' | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+      {%- endif -%}
+
+      {%- if second_image -%}
+        <img
+          class="product-card__image-alt"
+          src="{{ second_image | image_url: width: 600 }}"
+          alt="{{ second_image.alt | escape }}"
+          width="{{ second_image.preview_image.width }}"
+          height="{{ second_image.preview_image.height }}"
+          loading="lazy">
+      {%- endif -%}
+
+      <button class="product-card__wishlist" aria-label="{{ 'products.add_to_wishlist' | t }}: {{ product.title | escape }}" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      </button>
+    </div>
+  </a>
+
+  <div class="product-card__info">
+    {%- if product.vendor -%}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+
+    <h3 class="product-card__title">
+      <a href="{{ product_url }}">{{ product.title }}</a>
+    </h3>
+
+    <div class="product-card__price">
+      {%- if product.variants.size > 1 -%}
+        {%- if price_min != price_max -%}
+          <span>{{ 'products.from_price' | t: price: price_min | money }}</span>
+        {%- else -%}
+          <span>{{ price_min | money }}</span>
+        {%- endif -%}
+      {%- else -%}
+        {%- if on_sale -%}
+          <span class="product-card__price-sale">{{ product.price | money }}</span>
+          <span class="product-card__price-compare">{{ product.compare_at_price | money }}</span>
+        {%- else -%}
+          <span>{{ product.price | money }}</span>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- unless product.available -%}
+        <span class="product-card__badge" style="background-color: var(--color-text-muted); position: static; margin-left: 8px;">
+          {{ 'products.sold_out' | t }}
+        </span>
+      {%- endunless -%}
+    </div>
+  </div>
+</article>

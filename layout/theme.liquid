@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>
+    {%- if template == 'index' -%}
+      {{ shop.name }}{% if page_title != blank %} — {{ page_title }}{% endif %}
+    {%- elsif page_title == blank -%}
+      {{ shop.name }}
+    {%- else -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- if settings.favicon -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+  {%- endif -%}
+
+  {{ content_for_header }}
+
+  {{ 'theme.css' | asset_url | stylesheet_tag }}
+
+  <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+
+  {%- assign body_font = settings.font_body -%}
+  {%- assign heading_font = settings.font_heading -%}
+  {{ body_font | font_face: font_display: 'swap' }}
+  {{ heading_font | font_face: font_display: 'swap' }}
+
+  <style>
+    :root {
+      --color-primary: {{ settings.color_primary }};
+      --color-background: {{ settings.color_background }};
+      --color-accent: {{ settings.color_accent }};
+      --color-bg-secondary: {{ settings.color_bg_secondary }};
+      --color-footer-bg: {{ settings.color_footer_bg }};
+      --color-border: {{ settings.color_border }};
+      --color-text-muted: {{ settings.color_text_muted }};
+      --font-body: {{ body_font.family }}, {{ body_font.fallback_families }};
+      --font-body-weight: {{ body_font.weight }};
+      --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+      --font-heading-weight: {{ heading_font.weight }};
+      --type-base-size: {{ settings.type_base_size }}px;
+    }
+  </style>
+
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    window.shopUrl = '{{ shop.url }}';
+    window.cartType = '{{ settings.cart_type }}';
+    window.routes = {
+      root: '{{ routes.root_url }}',
+      cart: '{{ routes.cart_url }}',
+      cartAdd: '{{ routes.cart_add_url }}',
+      cartChange: '{{ routes.cart_change_url }}',
+      account: '{{ routes.account_url }}'
+    };
+    window.cartStrings = {
+      error: '{{ "cart.error" | t }}',
+      quantityError: '{{ "cart.quantity_error" | t }}'
+    };
+  </script>
+</head>
+
+<body class="no-js template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}" data-template="{{ template.name }}">
+
+  <a class="skip-to-content-link" href="#main-content">
+    {{ 'accessibility.skip_to_content' | t }}
+  </a>
+
+  {%- sections 'header-group' -%}
+
+  {% section 'announcement-bar' %}
+  {% section 'header' %}
+
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  {%- if settings.cart_type == 'drawer' -%}
+    {% section 'cart-drawer' %}
+  {%- endif -%}
+
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+</body>
+</html>

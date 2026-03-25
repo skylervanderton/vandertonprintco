@@ -1,0 +1,138 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "height": "large",
+        "text_alignment": "left",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 35,
+        "heading": "Fine Art Prints That Give Back",
+        "subheading": "Every purchase supports wildlife conservation.",
+        "button_label": "Shop Now",
+        "button_link": "/collections/shop",
+        "button_style": "outline_white"
+      }
+    },
+    "product_tabs": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_1": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Series"
+          }
+        },
+        "tab_2": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Animals"
+          }
+        },
+        "tab_3": {
+          "type": "tab",
+          "settings": {
+            "tab_label": "Format"
+          }
+        }
+      },
+      "block_order": ["tab_1", "tab_2", "tab_3"],
+      "settings": {
+        "heading": "Shop by Collection",
+        "products_per_tab": 8,
+        "show_view_all": true
+      }
+    },
+    "image_text_story": {
+      "type": "image-text",
+      "settings": {
+        "image_position": "left",
+        "bg_color": "#000000",
+        "text_color": "#ffffff",
+        "eyebrow": "Our Mission",
+        "heading": "Art with Purpose",
+        "text": "<p>Every print tells a story of wildlife, conservation, and the photographers who dedicate their lives to capturing these moments.</p>",
+        "button_label": "Our Story",
+        "button_link": "/pages/our-story"
+      }
+    },
+    "timeline": {
+      "type": "timeline",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Shot on Film",
+            "text": "Captured in the wild with professional film cameras for unmatched depth and texture."
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Printed on Premium Paper",
+            "text": "Processed by the world's finest labs using archival-grade fine art paper."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Hand-Signed",
+            "text": "Each print is personally signed and comes with a certificate of authenticity."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Custom Framed",
+            "text": "Framed in the US using museum-quality materials and white-glove packaging."
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3", "step_4"],
+      "settings": {
+        "eyebrow": "The Experience",
+        "heading": "From the Wild to Your Wall"
+      }
+    },
+    "partner_logos": {
+      "type": "partner-logos",
+      "blocks": {
+        "partner_1": {
+          "type": "logo",
+          "settings": { "alt_text": "Partner 1" }
+        },
+        "partner_2": {
+          "type": "logo",
+          "settings": { "alt_text": "Partner 2" }
+        },
+        "partner_3": {
+          "type": "logo",
+          "settings": { "alt_text": "Partner 3" }
+        }
+      },
+      "block_order": ["partner_1", "partner_2", "partner_3"],
+      "settings": {
+        "heading": "Our Conservation Partners"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "bg_color": "#f2f2f2",
+        "text_color": "#000000",
+        "eyebrow": "Stay Connected",
+        "heading": "Join the Journey",
+        "text": "Stay up to date with new collections and conservation stories."
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "product_tabs",
+    "image_text_story",
+    "timeline",
+    "partner_logos",
+    "newsletter"
+  ]
+}
