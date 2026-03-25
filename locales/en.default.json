@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "title": "Vanderton Print Co",
@@ -44,7 +53,7 @@
     "note_placeholder": "Order notes (optional)"
   },
   "products": {
-    "title": "Products",
+    "title": "Prints",
     "from_price": "From {{ price }}",
     "price_range": "{{ min }} – {{ max }}",
     "sale": "Sale",
@@ -55,7 +64,7 @@
     "size": "Size",
     "framing": "Framing",
     "add_to_wishlist": "Add to wishlist",
-    "view_product": "View product",
+    "view_product": "View print",
     "species": "Species",
     "endangered_level": "Endangered Level"
   },
