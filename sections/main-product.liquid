@@ -90,12 +90,7 @@
       </div>
 
       {%- comment -%} Product Form {%- endcomment -%}
-      {%- form 'product', product,
-        id: 'product-form',
-        class: 'product-form',
-        novalidate: 'novalidate',
-        data-variants: product.variants_with_only_default_variant | default: false
-      -%}
+      {%- form 'product', product, id: 'product-form', class: 'product-form', novalidate: 'novalidate' -%}
         <input type="hidden" name="id" value="{{ current_variant.id }}" id="variant-id">
 
         {%- unless product.has_only_default_variant -%}
