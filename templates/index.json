@@ -12,10 +12,11 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "image": "shopify://shop_images/Vanderton_Print_Co.jpg",
         "video": "",
         "height": "large",
         "overlay_color": "#000000",
-        "overlay_opacity": 35,
+        "overlay_opacity": 10,
         "text_alignment": "left",
         "text_color": "#ffffff",
         "eyebrow": "",
