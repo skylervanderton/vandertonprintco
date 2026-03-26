@@ -61,8 +61,8 @@
 
   /* Header */
   --header-height: 80px;
-  --header-bg: #000000;
-  --header-text: #ffffff;
+  --header-bg: #ffffff;
+  --header-text: #6A6A6A;
   --header-height-mobile: 60px;
 }
 
@@ -370,7 +370,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 0;
   z-index: 300;
   background-color: var(--header-bg);
-  border-bottom: 1px solid #262626;
+  border-bottom: 1px solid #e2e2e2;
   height: var(--header-height);
   transition: box-shadow var(--transition-base);
   color: var(--header-text);
