@@ -12,13 +12,15 @@
     "hero": {
       "type": "hero",
       "settings": {
+        "video": "",
         "height": "large",
-        "text_alignment": "left",
-        "text_color": "#ffffff",
         "overlay_color": "#000000",
         "overlay_opacity": 35,
-        "heading": "Fine Art Prints That Give Back",
-        "subheading": "Every purchase supports wildlife conservation.",
+        "text_alignment": "left",
+        "text_color": "#ffffff",
+        "eyebrow": "",
+        "heading": "Turn Your Walls Into A Story Worth Telling",
+        "subheading": "FINE ART PRINTS THAT SUPPORT A GREATER PURPOSE",
         "button_label": "Shop The Collections",
         "button_link": "/collections",
         "button_style": "outline_white"
@@ -30,34 +32,44 @@
         "tab_1": {
           "type": "tab",
           "settings": {
-            "tab_label": "Series"
+            "tab_label": "Series",
+            "collection": ""
           }
         },
         "tab_2": {
           "type": "tab",
           "settings": {
-            "tab_label": "Animals"
+            "tab_label": "Animals",
+            "collection": ""
           }
         },
         "tab_3": {
           "type": "tab",
           "settings": {
-            "tab_label": "Format"
+            "tab_label": "Format",
+            "collection": ""
           }
         }
       },
-      "block_order": ["tab_1", "tab_2", "tab_3"],
+      "block_order": [
+        "tab_1",
+        "tab_2",
+        "tab_3"
+      ],
       "settings": {
+        "eyebrow": "",
         "heading": "Shop by Collection",
+        "subheading": "",
         "products_per_tab": 8,
         "show_view_all": true
       }
     },
     "image_text_story": {
       "type": "image-text",
+      "custom_css": [],
       "settings": {
         "image_position": "left",
-        "bg_color": "#000000",
+        "bg_color": "#2d2d2d",
         "text_color": "#ffffff",
         "eyebrow": "Our Mission",
         "heading": "Art with Purpose",
@@ -98,10 +110,17 @@
           }
         }
       },
-      "block_order": ["step_1", "step_2", "step_3", "step_4"],
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
       "settings": {
+        "bg_color": "#f2f2f2",
         "eyebrow": "The Experience",
-        "heading": "From the Wild to Your Wall"
+        "heading": "From the Wild to Your Wall",
+        "subheading": ""
       }
     },
     "partner_logos": {
@@ -109,18 +128,31 @@
       "blocks": {
         "partner_1": {
           "type": "logo",
-          "settings": { "alt_text": "Partner 1" }
+          "settings": {
+            "alt_text": "Partner 1",
+            "link": ""
+          }
         },
         "partner_2": {
           "type": "logo",
-          "settings": { "alt_text": "Partner 2" }
+          "settings": {
+            "alt_text": "Partner 2",
+            "link": ""
+          }
         },
         "partner_3": {
           "type": "logo",
-          "settings": { "alt_text": "Partner 3" }
+          "settings": {
+            "alt_text": "Partner 3",
+            "link": ""
+          }
         }
       },
-      "block_order": ["partner_1", "partner_2", "partner_3"],
+      "block_order": [
+        "partner_1",
+        "partner_2",
+        "partner_3"
+      ],
       "settings": {
         "heading": "Our Conservation Partners"
       }
@@ -132,7 +164,9 @@
         "text_color": "#000000",
         "eyebrow": "Stay Connected",
         "heading": "Join the Journey",
-        "text": "Stay up to date with new collections and conservation stories."
+        "text": "Stay up to date with new collections and conservation stories.",
+        "button_label": "Subscribe",
+        "embed_code": ""
       }
     }
   },

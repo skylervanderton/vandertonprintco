@@ -1,19 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
-    "color_primary": "#000000",
+    "color_primary": "#6a6a6a",
     "color_background": "#ffffff",
     "color_accent": "#f94c43",
     "color_bg_secondary": "#f2f2f2",
     "color_footer_bg": "#f9f9f9",
     "color_border": "#e2e2e2",
     "color_text_muted": "#6a6a6a",
+    "font_heading": "cormorant_n4",
+    "font_body": "montserrat_n4",
     "type_base_size": 14,
     "logo_max_width": 160,
     "social_instagram": "",
     "social_facebook": "",
     "social_pinterest": "",
     "cart_type": "drawer",
-    "enable_cart_notes": false
+    "enable_cart_notes": false,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_bar": true,
+          "text": "20% of all sales are donated directly to our conservation partners",
+          "link": "",
+          "bg_color": "#2d2d2d",
+          "text_color": "#ffffff",
+          "enable_marquee": false
+        }
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "logo_max_width": 180,
+          "main_menu": "main-menu",
+          "sticky_header": true,
+          "header_bg_color": "#000000",
+          "header_border_bottom": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "bg_color": "#f9f9f9",
+          "brand_tagline": "Fine art prints for those who care about our planet.",
+          "footer_heading_1": "About",
+          "footer_menu_1": "footer",
+          "footer_heading_2": "Shop",
+          "footer_menu_2": "",
+          "footer_heading_3": "Help",
+          "footer_menu_3": "",
+          "footer_menu": ""
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
   },
   "presets": {}
 }
