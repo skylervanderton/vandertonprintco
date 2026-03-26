@@ -5,21 +5,66 @@
 >
   <div class="site-header__inner container--wide">
 
-    {%- comment -%} Logo {%- endcomment -%}
-    <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
-      {%- if section.settings.logo -%}
-        <img
-          src="{{ section.settings.logo | image_url: width: section.settings.logo_max_width }}"
-          alt="{{ shop.name }}"
-          width="{{ section.settings.logo_max_width }}"
-          height="auto"
-          loading="eager">
-      {%- else -%}
-        <span class="site-header__logo-text">{{ shop.name }}</span>
-      {%- endif -%}
-    </a>
+    {%- comment -%} Logo — centered above nav {%- endcomment -%}
+    <div class="site-header__top">
+      <a class="site-header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+        {%- if section.settings.logo -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: section.settings.logo_max_width }}"
+            alt="{{ shop.name }}"
+            width="{{ section.settings.logo_max_width }}"
+            height="auto"
+            loading="eager">
+        {%- else -%}
+          <span class="site-header__logo-text">{{ shop.name }}</span>
+        {%- endif -%}
+      </a>
 
-    {%- comment -%} Desktop Navigation {%- endcomment -%}
+      {%- comment -%} Utility Icons — top right {%- endcomment -%}
+      <div class="site-header__icons">
+        <button
+          class="site-header__icon"
+          data-open-search
+          aria-label="{{ 'accessibility.open_search' | t }}"
+          type="button"
+        >
+          {% render 'icon-search' %}
+        </button>
+
+        <a
+          class="site-header__icon site-header__icon--account"
+          href="{{ routes.account_url }}"
+          aria-label="{{ 'accessibility.view_account' | t }}"
+        >
+          {% render 'icon-account' %}
+        </a>
+
+        <button
+          class="site-header__icon site-header__cart"
+          data-open-cart
+          aria-label="{{ 'accessibility.open_cart' | t }} ({{ cart.item_count }})"
+          type="button"
+        >
+          {% render 'icon-cart' %}
+          <span class="cart-count{% if cart.item_count == 0 %}" style="display:none"{% else %}"{% endif %}" aria-hidden="true">
+            {{ cart.item_count }}
+          </span>
+        </button>
+
+        <button
+          class="site-header__icon site-header__hamburger"
+          data-open-mobile-menu
+          aria-label="{{ 'accessibility.open_menu' | t }}"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          type="button"
+        >
+          {% render 'icon-hamburger' %}
+        </button>
+      </div>
+    </div>
+
+    {%- comment -%} Desktop Navigation — below logo {%- endcomment -%}
     <nav class="site-nav" aria-label="Primary navigation" role="navigation">
       <ul class="site-nav__list" role="list">
         {%- for link in linklists[section.settings.main_menu].links -%}
@@ -57,49 +102,6 @@
         {%- endfor -%}
       </ul>
     </nav>
-
-    {%- comment -%} Utility Icons {%- endcomment -%}
-    <div class="site-header__icons">
-      <button
-        class="site-header__icon"
-        data-open-search
-        aria-label="{{ 'accessibility.open_search' | t }}"
-        type="button"
-      >
-        {% render 'icon-search' %}
-      </button>
-
-      <a
-        class="site-header__icon site-header__icon--account"
-        href="{{ routes.account_url }}"
-        aria-label="{{ 'accessibility.view_account' | t }}"
-      >
-        {% render 'icon-account' %}
-      </a>
-
-      <button
-        class="site-header__icon site-header__cart"
-        data-open-cart
-        aria-label="{{ 'accessibility.open_cart' | t }} ({{ cart.item_count }})"
-        type="button"
-      >
-        {% render 'icon-cart' %}
-        <span class="cart-count{% if cart.item_count == 0 %}" style="display:none"{% else %}"{% endif %}" aria-hidden="true">
-          {{ cart.item_count }}
-        </span>
-      </button>
-
-      <button
-        class="site-header__icon site-header__hamburger"
-        data-open-mobile-menu
-        aria-label="{{ 'accessibility.open_menu' | t }}"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        type="button"
-      >
-        {% render 'icon-hamburger' %}
-      </button>
-    </div>
 
   </div>
 </header>
