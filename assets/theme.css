@@ -927,7 +927,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-black .image-text__eyebrow {
-  color: rgba(255,255,255,0.6);
+  color: #ffffff;
 }
 
 .image-text__heading {
@@ -947,7 +947,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-black .image-text__text {
-  color: rgba(255,255,255,0.7);
+  color: #ffffff;
 }
 
 /* =============================================================================
