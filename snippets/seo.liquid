@@ -7,7 +7,7 @@
 {%- endcomment -%}
 
 {%- liquid
-  comment ---- TITLE ---- endcomment
+  # ---- TITLE ----
   case template.name
     when 'index'
       assign seo_title = 'Fine Art Nature Prints for Your Home | Vanderton Print Co.'
@@ -36,7 +36,7 @@
       assign seo_title = page_title | append: ' | Vanderton Print Co.'
   endcase
 
-  comment ---- META DESCRIPTION DEFAULTS ---- endcomment
+  # ---- META DESCRIPTION DEFAULTS ----
   case template.name
     when 'index'
       assign seo_description_default = 'Shop fine art nature prints and framed prints from Vanderton Print Co. Printed on archival Hahnemühle Torchon Paper. Landscapes, animals, botanicals, and more — shipped nationwide.'
@@ -63,9 +63,7 @@
       assign seo_description_default = page_description
   endcase
 
-  comment
-    Allow metafield override via Shopify admin: namespace=seo, key=description
-  endcomment
+  # Allow metafield override via Shopify admin: namespace=seo, key=description
   if template.name == 'product' and product.metafields.seo.description != blank
     assign seo_description = product.metafields.seo.description
   elsif template.name == 'collection' and collection.metafields.seo.description != blank
@@ -78,7 +76,7 @@
     assign seo_description = seo_description_default
   endif
 
-  comment ---- OG IMAGE ---- endcomment
+  # ---- OG IMAGE ----
   if template.name == 'product' and product.featured_image
     assign og_image = product.featured_image | image_url: width: 1200
     assign og_image_alt = product.featured_image.alt | default: product.title | escape
