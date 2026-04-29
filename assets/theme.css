@@ -371,12 +371,30 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 300;
   background-color: var(--header-bg);
   border-bottom: 1px solid #e2e2e2;
-  transition: box-shadow var(--transition-base);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
   color: var(--header-text);
 }
 
 .site-header.is-sticky {
   box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+/* Desktop: transparent header until scrolled */
+@media (min-width: 769px) {
+  .site-header:not(.is-sticky) {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    color: #ffffff;
+  }
+  .site-header:not(.is-sticky) .site-header__logo-text,
+  .site-header:not(.is-sticky) .site-header__icon,
+  .site-header:not(.is-sticky) .site-header__icon svg {
+    color: #ffffff;
+    stroke: #ffffff;
+  }
+  .site-header:not(.is-sticky) .site-nav__link {
+    color: #ffffff;
+  }
 }
 
 .site-header__inner {
