@@ -63,6 +63,14 @@ function initStickyHeader() {
   const header = $('.site-header');
   if (!header) return;
 
+  // Measure real header height and expose as CSS var for hero offset
+  function setHeaderHeight() {
+    const h = header.offsetHeight;
+    document.documentElement.style.setProperty('--header-height', h + 'px');
+  }
+  setHeaderHeight();
+  window.addEventListener('resize', setHeaderHeight, { passive: true });
+
   const threshold = 40;
 
   function onScroll() {

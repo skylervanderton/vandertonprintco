@@ -395,6 +395,10 @@ h1, h2, h3, h4, h5, h6 {
   .site-header:not(.is-sticky) .site-nav__link {
     color: #ffffff;
   }
+  /* Pull hero up behind transparent header */
+  .hero {
+    margin-top: calc(-1 * var(--header-height));
+  }
 }
 
 .site-header__inner {
