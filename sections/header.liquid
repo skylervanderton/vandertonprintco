@@ -46,7 +46,7 @@
           type="button"
         >
           {% render 'icon-cart' %}
-          <span class="cart-count{% if cart.item_count == 0 %}" style="display:none"{% else %}"{% endif %}" aria-hidden="true">
+          <span class="cart-count" {% if cart.item_count == 0 %}style="display:none"{% endif %} aria-hidden="true">
             {{ cart.item_count }}
           </span>
         </button>

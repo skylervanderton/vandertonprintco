@@ -43,7 +43,8 @@
           "logo_max_width": 180,
           "main_menu": "main-menu",
           "sticky_header": true,
-          "header_bg_color": "#000000",
+          "header_bg_color": "#ffffff",
+          "header_text_color": "#6a6a6a",
           "header_border_bottom": true
         }
       },

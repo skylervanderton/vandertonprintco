@@ -38,6 +38,9 @@
       --font-heading: {{ heading_font.family }}, {{ heading_font.fallback_families }};
       --font-heading-weight: {{ heading_font.weight }};
       --type-base-size: {{ settings.type_base_size }}px;
+      {%- assign header_section = sections['header'] -%}
+      --header-bg: {{ header_section.settings.header_bg_color | default: '#ffffff' }};
+      --header-text: {{ header_section.settings.header_text_color | default: '#6a6a6a' }};
     }
   </style>
 
