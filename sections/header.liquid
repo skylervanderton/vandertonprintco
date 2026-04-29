@@ -168,6 +168,16 @@
     </ul>
 
     <div style="margin-top: 32px; display: flex; flex-direction: column; gap: 12px;">
+      <button
+        class="btn btn--secondary btn--full"
+        data-open-search
+        type="button"
+      >Search</button>
+      <button
+        class="btn btn--secondary btn--full"
+        data-open-cart
+        type="button"
+      >Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</button>
       <a href="{{ routes.account_url }}" class="btn btn--secondary btn--full">Account</a>
     </div>
   </nav>

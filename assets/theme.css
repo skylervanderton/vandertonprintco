@@ -2028,7 +2028,8 @@ h1, h2, h3, h4, h5, h6 {
   .site-nav { display: none; }
   .site-header__hamburger { display: flex; }
   .site-header__icon--account,
-  .site-header__icon--search { display: none; }
+  .site-header__icon--search,
+  .site-header__cart { display: none; }
 
   /* Grids */
   .grid--2col,
