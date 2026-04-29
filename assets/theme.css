@@ -366,8 +366,10 @@ h1, h2, h3, h4, h5, h6 {
    LAYER 8: HEADER & NAVIGATION
    ============================================================================= */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 300;
   background-color: var(--header-bg);
   border-bottom: 1px solid #e2e2e2;
@@ -395,9 +397,9 @@ h1, h2, h3, h4, h5, h6 {
   .site-header:not(.is-sticky) .site-nav__link {
     color: #ffffff;
   }
-  /* Pull hero up behind transparent header */
-  .hero {
-    margin-top: calc(-1 * var(--header-height));
+  /* Non-hero pages: push content below the fixed header */
+  .main--offset {
+    padding-top: var(--header-height);
   }
 }
 
