@@ -922,12 +922,8 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: inherit;
   margin-bottom: var(--space-5);
-}
-
-.bg-black .image-text__eyebrow {
-  color: #ffffff;
 }
 
 .image-text__heading {
@@ -943,11 +939,7 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.8;
   max-width: 480px;
   margin-bottom: var(--space-8);
-  color: var(--color-text-muted);
-}
-
-.bg-black .image-text__text {
-  color: #ffffff;
+  color: inherit;
 }
 
 /* =============================================================================

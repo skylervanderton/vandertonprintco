@@ -35,7 +35,7 @@
     {%- if section.settings.button_label != blank -%}
       <a
         href="{{ section.settings.button_link }}"
-        class="btn {% if section.settings.bg_color == '#000000' or section.settings.bg_color == '#000' %}btn--outline-white{% else %}btn--secondary{% endif %}"
+        class="btn {% if section.settings.text_color == '#ffffff' or section.settings.text_color == '#fff' or section.settings.text_color == '#FFFFFF' %}btn--outline-white{% else %}btn--secondary{% endif %}"
       >
         {{ section.settings.button_label }}
       </a>
